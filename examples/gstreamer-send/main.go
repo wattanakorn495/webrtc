@@ -5,7 +5,7 @@ import (
 
 	"github.com/pions/webrtc"
 	"github.com/pions/webrtc/examples/util"
-	"github.com/pions/webrtc/examples/util/gstreamer-src"
+	gst "github.com/pions/webrtc/examples/util/gstreamer-src"
 	"github.com/pions/webrtc/pkg/ice"
 )
 
@@ -48,7 +48,8 @@ func main() {
 	util.Check(err)
 
 	// Wait for the offer to be pasted
-	offer := util.Decode(util.MustReadStdin())
+	offer := webrtc.RTCSessionDescription{}
+	util.Decode(util.MustReadStdin(), &offer)
 
 	// Set the remote SessionDescription
 	err = peerConnection.SetRemoteDescription(offer)
